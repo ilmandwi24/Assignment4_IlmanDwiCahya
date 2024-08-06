@@ -1,0 +1,386 @@
+{
+	"info": {
+		"_postman_id": "d51a310b-0a25-4ad4-b9cd-85bc83c88dc0",
+		"name": "Laptop Inventory Auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36792217"
+	},
+	"item": [
+		{
+			"name": "Laptop",
+			"item": [
+				{
+					"name": "Dev - Add Laptop",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nama\": \"Asus\",\r\n    \"brand\": \"Asus\",\r\n    \"processor\": \"Ryzen 5\",\r\n    \"ram\": \"8\",\r\n    \"vga\": \"NVIDIA\",\r\n    \"harga\": \"10.000.000\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/laptop",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"laptop"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dev - List Laptop",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN0YWZmQGdtYWlsLmNvbSIsInN0YXR1cyI6InN0YWZmIiwiaWF0IjoxNzIxOTY2NjI2LCJleHAiOjE3MjE5NzAyMjZ9.rdz39dhJ9iXQ-Ss5wUyfLPw07woX5GvhNs9FSc49PAQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/laptop",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"laptop"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dev - Edit Laptop",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nama\": \"Asus\",\r\n    \"brand\": \"Asus\",\r\n    \"processor\": \"Ryzen 5\",\r\n    \"ram\": 8,\r\n    \"vga\": \"NVIDIA\",\r\n    \"harga\": 8000\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/laptop/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"laptop",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dev - Delete Laptop",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/laptop/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"laptop",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Laptop",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nama\": \"Asus\",\r\n    \"brand\": \"Asus\",\r\n    \"processor\": \"Ryzen 5\",\r\n    \"ram\": \"8\",\r\n    \"vga\": \"NVIDIA\",\r\n    \"harga\": \"10.000.000\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://auth-data-laptop.adaptable.app/api/v1/laptop",
+							"protocol": "https",
+							"host": [
+								"auth-data-laptop",
+								"adaptable",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"laptop"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Laptop",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://auth-data-laptop.adaptable.app/api/v1/laptop",
+							"protocol": "https",
+							"host": [
+								"auth-data-laptop",
+								"adaptable",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"laptop"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Laptop",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nama\": \"Asus\",\r\n    \"brand\": \"Asus\",\r\n    \"processor\": \"Ryzen 5\",\r\n    \"ram\": 8,\r\n    \"vga\": \"NVIDIA\",\r\n    \"harga\": 1000\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://auth-data-laptop.adaptable.app/api/v1/laptop/1",
+							"protocol": "https",
+							"host": [
+								"auth-data-laptop",
+								"adaptable",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"laptop",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Laptop",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://auth-data-laptop.adaptable.app/api/v1/laptop/1",
+							"protocol": "https",
+							"host": [
+								"auth-data-laptop",
+								"adaptable",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"laptop",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Dev - Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"staff@gmail.com\",\r\n    \"nama\" : \"staff\",\r\n    \"password\": \"staff\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dev - User Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"staff@gmail.com\",\r\n    \"password\": \"staff\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{developer}}/api/user/login",
+							"host": [
+								"{{developer}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"staff@gmail.com\",\r\n    \"nama\" : \"staff\",\r\n    \"password\": \"staff\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{developer}}/api/user/register",
+							"host": [
+								"{{developer}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"staff@gmail.com\",\r\n    \"password\": \"staff\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{developer}}/api/user/login",
+							"host": [
+								"{{developer}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "developer",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "production",
+			"value": "https://crud-data-laptop.adaptable.app",
+			"type": "string"
+		}
+	]
+}

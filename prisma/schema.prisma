@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model laptop {
+  id        Int     @id @default(autoincrement())
+  nama      String? @db.VarChar(100)
+  brand     String? @db.VarChar(100)
+  processor String? @db.VarChar(100)
+  ram       Int?
+  vga       String? @db.VarChar(100)
+  harga     Float?
+}

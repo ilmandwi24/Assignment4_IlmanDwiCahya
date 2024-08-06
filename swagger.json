@@ -1,0 +1,939 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Laptop Database API",
+    "version": "1.0.0",
+    "description": "API documentation for Laptop Database application"
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-access-token",
+        "description": "Contoh Value => Bearer {token}"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://auth-data-laptop.adaptable.app"
+    },
+    {
+      "url": "http://localhost:8080"
+    }
+  ],
+  "paths": {
+    "/api/v1/laptop": {
+      "get": {
+        "tags": ["Laptop"],
+        "summary": "Get list of laptops",
+        "security": [
+            {
+                "ApiKeyAuth": []
+            }
+            ],
+        "responses": {
+          "200": {
+            "description": "Successful get list laptop",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                          "count": {
+                            "type": "number"
+                          },
+                          "listId": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
+                          },
+                          "list": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "price": {
+                                  "type": "string"
+                                },
+                                "stock": {
+                                  "type": "integer"
+                                },
+                                "brand_id": {
+                                  "type": "integer"
+                                }
+                              }
+                            }
+                          }
+                        }
+                     
+                    },
+                    "transaction_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "00000",
+                    "message": "Success",
+                    "data": {
+                      "count": 4,
+                      "listId": [
+                        2,
+                        4,
+                        5,
+                        6
+                      ],
+                      "list": [
+                        {
+                          "id": 2,
+                          "nama": "Asus",
+                          "brand": "Asus",
+                          "processor": "Ryzen 5",
+                          "ram": 8,
+                          "vga": "NVIDIA",
+                          "harga": 10000000
+                        },
+                        {
+                          "id": 4,
+                          "nama": "Asus",
+                          "brand": "Asus",
+                          "processor": "Ryzen 5",
+                          "ram": 8,
+                          "vga": "NVIDIA",
+                          "harga": 9000
+                        },
+                        {
+                          "id": 5,
+                          "nama": "Acer",
+                          "brand": "Acer",
+                          "processor": "Intel i5",
+                          "ram": 16,
+                          "vga": "RTX 3060",
+                          "harga": 20000000
+                        },
+                        {
+                          "id": 6,
+                          "nama": "Hp",
+                          "brand": "Hp",
+                          "processor": "Intel i7",
+                          "ram": 16,
+                          "vga": "NVIDIA",
+                          "harga": 10000000
+                        }
+                      ]
+                    },
+                    "transaction_id": "A3022407271453316210"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "transaction_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": 401,
+                    "message": "Unauthorized",
+                    "error": "Unauthorized",
+                    "transaction_id": "A3022407271540222630"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "transaction_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": 404,
+                    "message": "Laptop not found",
+                    "error": "Not Found",
+                    "transaction_id": "A3022407251045138600"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "transaction_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": 500,
+                    "message": "An internal server error occurred",
+                    "error": "Internal Server Error",
+                    "transaction_id": "A3022407251037260380"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Laptop"],
+        "summary": "Add a new laptop",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nama": {
+                    "type": "string"
+                  },
+                  "brand": {
+                    "type": "string"
+                  },
+                  "processor": {
+                    "type": "string"
+                  },
+                  "ram": {
+                    "type": "integer"
+                  },
+                  "vga": {
+                    "type": "string"
+                  },
+                  "harga": {
+                    "type": "integer"
+                  }
+                },
+                "required": ["name", "brand", "processor", "ram", "vga", "harga"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Laptop added successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "string"
+                    },
+                    "transaction_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "00000",
+                    "message": "Success",
+                    "data": "Added 'Acer' to laptop",
+                    "transaction_id": "A3022407271548502780"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "transaction_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": 400,
+                    "message": "\"harga\" must be a number",
+                    "error": "Bad Request",
+                    "transaction_id": "A3022407271604081950"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "transaction_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": 500,
+                    "message": "An internal server error occurred",
+                    "error": "Internal Server Error",
+                    "transaction_id": "A3022407251037260380"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/laptop/{id}": {
+        "put": {
+        "tags": ["Laptop"],
+        "summary": "Update a laptop",
+       
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nama": {
+                    "type": "string"
+                  },
+                  "brand": {
+                    "type": "string"
+                  },
+                  "processor": {
+                    "type": "string"
+                  },
+                  "ram": {
+                    "type": "integer"
+                  },
+                  "vga": {
+                    "type": "string"
+                  },
+                  "harga": {
+                    "type": "integer"
+                  }
+                },
+                "required": ["name", "brand", "processor", "ram", "vga", "harga"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Laptop updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "transaction_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "00000",
+                    "message": "Success",
+                    "data": "Edited 'Acer' to laptop",
+                    "transaction_id": "A3022407271703518910"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "transaction_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": 400,
+                    "message": "name must be a string | price,stock,brand_id must be a number",
+                    "error": "Bad Request",
+                    "transaction_id": "A3022407251109116530"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "example": {
+                    "status": 401,
+                    "message": "Success",
+                    "data": {
+                      "message": "No token provided"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "transaction_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": 404,
+                    "message": "Laptop with id 13 not foun",
+                    "error": "Not Found",
+                    "transaction_id": "A3022407251045138600"
+                  }
+                }
+              }
+            }
+          },
+          
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "transaction_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": 500,
+                    "message": "An internal server error occurred",
+                    "error": "Internal Server Error",
+                    "transaction_id": "A3022407251037260380"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Laptop"],
+        "summary": "Delete a laptop",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Laptop deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "string"
+                    },
+                    "transaction_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "00000",
+                    "message": "Success",
+                    "data": "Delete id 16 successfully",
+                    "transaction_id": "A3022407271658534780"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "transaction_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": 400,
+                    "message": "\\\"id\\\" must be a number",
+                    "error": "Bad Request",
+                    "transaction_id": "A3022407251109116530"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "transaction_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": 404,
+                    "message": "Laptop with id 13 not foun",
+                    "error": "Not Found",
+                    "transaction_id": "A3022407251045138600"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "transaction_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": 500,
+                    "message": "An internal server error occurred",
+                    "error": "Internal Server Error",
+                    "transaction_id": "A3022407251037260380"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      
+    },
+    "/api/user/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password"
+                  }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "token": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "transaction_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "00000",
+                    "message": "Success",
+                    "data": {
+                      "id": 32,
+                      "email": "staff@gmail.com",
+                      "nama": "staff",
+                      "token": "eyJhbGciOi8...",
+                      "status": "staff"
+                    },
+                    "transaction_id": "A3022407270557139390"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request cause email input invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "transaction_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": 400,
+                    "message": "\"email\" must be a valid email",
+                    "error": "Bad Request",
+                    "transaction_id": "A3022407270522317650"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user/register": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Register",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "staff"
+                  },
+                  "nama": {
+                    "type": "string",
+                    "example": "staff"
+                  }
+                },
+                "required": ["email", "password", "nama"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Register successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "string"
+                    },
+                    "transaction_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": "00000",
+                    "message": "Success",
+                    "data": "registration successful",
+                    "transaction_id": "A3022407270520334220"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request cause email input invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "transaction_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": 400,
+                    "message": "\"email\" must be a valid email",
+                    "error": "Bad Request",
+                    "transaction_id": "A3022407270522317650"
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict cause email is already register",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "transaction_id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "status": 409,
+                    "message": "Email staff@gmail.com is already register",
+                    "error": "Conflict",
+                    "transaction_id": "A3022407270553016810"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
